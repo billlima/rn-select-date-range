@@ -111,6 +111,7 @@ export default App;
 | Prop                             | Type          | Required   | Description                                                                                                   |
 | :------------------------------- | :------------ | :--------- | :------------------------------------------------------------------------------------------------------------ |
 | **`onSelectDateRange`**          | `Method`      | `Required` | This will return a object with firstDate and lastDate                                                         |
+| **`onSelectDateRange`**          | `Method`      | `Optional` | This will return a object with date                                                         |
 | **`maxDate`**                    | `Moment Date` | `Optional` | If you need to pass Max Date user can select, set this prop as a moment date                                  |
 | **`minDate`**                    | `Moment Date` | `Optional` | If you need to pass Min Date user can select, set this prop as a moment date                                  |
 | **`responseFormat`**             | `String`      | `Optional` | Please refere the date formats here [Moment Date Formats](https://momentjs.com/docs/#/parsing/string-format/) |

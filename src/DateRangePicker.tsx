@@ -16,8 +16,13 @@ interface IResponse {
   secondDate: string | moment.Moment;
 }
 
+interface SingleResponse {
+  date: string | moment.Moment;
+}
+
 interface IProps {
   onSelectDateRange: (response: IResponse) => void;
+  onSelectDateSingle?: (response: SingleResponse) => void;
   responseFormat?: string;
   maxDate?: moment.Moment;
   minDate?: moment.Moment;
@@ -29,6 +34,7 @@ interface IProps {
 
 const DateRangePicker = ({
   onSelectDateRange,
+  onSelectDateSingle,
   responseFormat,
   maxDate,
   minDate,
@@ -46,6 +52,18 @@ const DateRangePicker = ({
   const lastYear = selectedDate.clone().subtract(1, "years");
   const nextMonth = selectedDate.clone().add(1, "months");
   const nextYear = selectedDate.clone().add(1, "years");
+
+  const returnSelectedSingle = (d: moment.Moment) => {
+    if (responseFormat) {
+      onSelectDateSingle!({
+        date: d.format(responseFormat)
+      });
+    } else {
+      onSelectDateSingle!({
+        date: d
+      })
+    }
+  }
 
   const returnSelectedRange = (fd: moment.Moment, ld: moment.Moment) => {
     const isWrongSide = ld?.isBefore(fd);
@@ -73,6 +91,10 @@ const DateRangePicker = ({
       (firstDate?.isSame(date, "dates") || secondDate?.isSame(date, "dates"))
     ) {
       return;
+    }
+
+    if (onSelectDateSingle) {
+      returnSelectedSingle(date);
     }
 
     if (!firstDate) {
